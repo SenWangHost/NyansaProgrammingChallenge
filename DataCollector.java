@@ -61,8 +61,10 @@ public class DataCollector {
         List<String> list = new ArrayList<>();
         while (dates.size() > 0) {
             String dateTime = dates.poll();
+            // print out the date
             System.out.println(formatDateOutput(dateTime) + " GMT");
             DailyDataCollector ddCollector = map.get(dateTime);
+            // print out the daily records
             ddCollector.printDailyRecords();
             list.add(dateTime);
         }
