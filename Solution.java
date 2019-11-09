@@ -19,7 +19,7 @@ public class Solution {
         }
         DataCollector dataCollector = new DataCollector();
         String fileName = args[0];
-        // use java buffered reader to read the file one line by one to avoid caching the whole file
+        // use java buffered reader to read the file one line by one line to avoid caching the whole file
         // into memory
         try {
             BufferedReader reader = new BufferedReader(new FileReader(fileName));

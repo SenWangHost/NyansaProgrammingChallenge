@@ -1,11 +1,12 @@
 import java.util.*;
 /**
  * This is the class for collecting data for each day, in order to preserve the sorted-by-frequency
- * data structure in O(1), we use double linked list + hashmap to achieve it.
+ * data structure in O(1), we use double linked list and hashmap to achieve it.
  */
 public class DailyDataCollector {
     /**
-     * the double linked list for keeping tracking of frequency and the urls that has matched frequency
+     * the double linked list for keeping tracking of frequency and the urls that has the
+     * same frequency with each other
      */
     private DoubleLinkedList list;
     /**
@@ -34,6 +35,7 @@ public class DailyDataCollector {
                 list.insertBefore(list.tail, newNode);
                 map.put(inUrl, newNode);
             } else {
+                // add the url to the last node's url collection
                 Node lastNode = list.tail.prev;
                 lastNode.urls.add(inUrl);
                 map.put(inUrl, lastNode);
@@ -46,18 +48,17 @@ public class DailyDataCollector {
                 newNode.freq = curr.freq + 1;
                 newNode.urls.add(inUrl);
                 list.insertBefore(curr, newNode);
-                // remove from current node's urls
-                curr.urls.remove(inUrl);
-                // remove the current node if there is no urls inside it
-                if (curr.urls.size() == 0) {
-                    list.removeNode(curr);
-                }
                 map.put(inUrl, newNode);
             } else {
-                // remove url from current node and add it to the next node
-                curr.urls.remove(inUrl);
+                // inser the urls to the next node of current node
                 curr.next.urls.add(inUrl);
                 map.put(inUrl, curr.next);
+            }
+            // remove url from current node and add it to the next node
+            curr.urls.remove(inUrl);
+            // remove the current node if there is no urls inside it
+            if (curr.urls.size() == 0) {
+                list.removeNode(curr);
             }
         }
     }

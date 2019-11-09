@@ -11,7 +11,7 @@ public class DataCollector {
      */
     private Map<String, DailyDataCollector> map;
     /**
-     * The heap for maintaining the order of date
+     * The heap for maintaining the order of date in chronological order
      */
     private PriorityQueue<String> dates;
     /**
@@ -29,6 +29,7 @@ public class DataCollector {
         if (inRecord == null || inRecord.length() == 0) {
             return;
         }
+        // parse out the date and url from record
         String[] strs = inRecord.split("\\|");
         if (strs.length != 2) {
             return;
